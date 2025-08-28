@@ -93,8 +93,10 @@ body{
 .card-versus__container{
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-content: center;
     padding-top: 0.1rem;
-    margin-top: 5rem;
+    /* margin-top: 5rem; */
     /* height: 300px; */
 }
 
@@ -124,6 +126,7 @@ body{
     height: 11.2rem;
     width: 8rem;
     border-radius: 8px;
+    border: 1px solid #fff;
 }
 
 .card{

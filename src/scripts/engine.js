@@ -103,19 +103,42 @@ async function removeAllCardsImages(){
     imageElements.forEach(img => img.remove());
 }
 
+async function hiddenCardsDetails(){
+    state.cardSprites.avatar.src = "";
+    state.cardSprites.name.innerText = "";
+    state.cardSprites.type.innerText = "";
+}
+
+async function showHiddenCardFieldImages(value){
+    if(value === true){
+        state.fieldCards.player.style.display = "block";
+        state.fieldCards.computer.style.display = "block";
+    }
+    else if(value === false){
+        state.fieldCards.player.style.display = "none";
+        state.fieldCards.computer.style.display = "none";
+    }
+}
+
 async function setCardsField(cardId){
     await removeAllCardsImages();
     let computerCardId = await getRandomCard();
-    state.fieldCards.player.style.display = "block";
-    state.fieldCards.computer.style.display = "block";
 
-    state.fieldCards.player.src = cardData[cardId].img;
-    state.fieldCards.computer.src = cardData[computerCardId].img
+    await showHiddenCardFieldImages(true);
+
+    hiddenCardsDetails();
+
+    await drawCardsInField(cardId, computerCardId);
     
     let duelResults = await checkDuelResults(cardId, computerCardId)
-
+    
     await updateScore();
     await drawButton(duelResults);
+}
+
+async function drawCardsInField(cardId, computerCardId){
+    state.fieldCards.player.src = cardData[cardId].img;
+    state.fieldCards.computer.src = cardData[computerCardId].img
 }
 
 async function drawButton(text){
@@ -163,8 +186,7 @@ async function resetDuel() {
     state.cardSprites.avatar.src = "";
     state.actions.button.style.display = "none";
 
-    state.fieldCards.player.style.display = "none";
-    state.fieldCards.computer.style.display = "none";
+    showHiddenCardFieldImages(false);
 
     init();
 }
@@ -177,7 +199,9 @@ async function playAudio(status) {
     catch{};
 }
 
-function init() {
+async function init() {
+    await showHiddenCardFieldImages(false);
+
     drawCards(5, state.playerSides.player1);
     drawCards(5, state.playerSides.computer);
 }
