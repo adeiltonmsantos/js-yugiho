@@ -1,9 +1,9 @@
 # Yu-Gi-Oh | Jo-ken-po Edition
 
-Jogo de jokenpo que criei para explicar conceitos de lógica de programação aplicados a jogos
+Jogo de cartas Yu-GiOh elaborado como desafio de projeto para o curso DIO BootCamp Frontend Santander
 
-conceitos abordados:
+Conceitos abordados:
 
-- Armazenamento e gerenciamento de estado manual
-- Funções limpas
-- Organização de código
+- Assincronismo (JavaScript)
+- DOM
+- HTML/CSS
